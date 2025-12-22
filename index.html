@@ -17,193 +17,189 @@
 
 <body class="flex items-center justify-center min-h-screen">
 
-  <!-- MODAL DE CADASTRO -->
-  <div id="modalCadastro" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
-    <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md">
+<!-- MODAL DE CADASTRO -->
+<div id="modalCadastro" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+  <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md">
 
-      <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
-        🔐 Identificação do Visitante
-      </h2>
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
+      🔐 Identificação do Visitante
+    </h2>
 
-      <div class="space-y-4">
-        <input id="nome" type="text" placeholder="Nome completo"
-          class="w-full px-4 py-2 border border-gray-300 rounded-xl
-                 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
+    <div class="space-y-4">
+      <input id="nome" type="text" placeholder="Nome completo"
+        class="w-full px-4 py-2 border border-gray-300 rounded-xl
+               focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
 
-        <input id="empresa" type="text" placeholder="Empresa"
-          class="w-full px-4 py-2 border border-gray-300 rounded-xl
-                 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
+      <input id="empresa" type="text" placeholder="Empresa"
+        class="w-full px-4 py-2 border border-gray-300 rounded-xl
+               focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
 
-        <input id="dataVisita" type="date"
-          class="w-full px-4 py-2 border border-gray-300 rounded-xl
-                 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
+      <input id="dataVisita" type="date"
+        class="w-full px-4 py-2 border border-gray-300 rounded-xl
+               focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
 
-        <select id="unidade"
-          class="w-full px-4 py-2 border border-gray-300 rounded-xl
-                 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
-          <option value="">Selecione a unidade</option>
-          <option>Osasco (Matriz)</option>
-          <option>Sumaré</option>
-          <option>Pernambuco</option>
-        </select>
+      <select id="unidade"
+        class="w-full px-4 py-2 border border-gray-300 rounded-xl
+               focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
+        <option value="">Selecione a unidade</option>
+        <option>Osasco (Matriz)</option>
+        <option>Sumaré</option>
+        <option>Pernambuco</option>
+      </select>
 
-        <button id="btnIniciar" disabled
-          class="w-full bg-yellow-400 text-black font-semibold py-2 rounded-xl
-                 hover:bg-yellow-500 active:scale-95 transition
-                 disabled:bg-gray-300 disabled:cursor-not-allowed shadow-lg">
-          Iniciar Integração
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- POPUP DE AVISO -->
-  <div id="popupAviso"
-       class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full text-center">
-      <div class="text-4xl mb-4">⚠️</div>
-      <h3 class="text-xl font-bold text-gray-800 mb-3">Atenção</h3>
-      <p class="text-gray-600 mb-6">
-        Para iniciar a integração, é necessário preencher
-        todas as informações do visitante.
-      </p>
-      <button onclick="fecharAviso()"
-              class="w-full bg-yellow-400 text-black font-semibold py-2 rounded-xl
-                     hover:bg-yellow-500 active:scale-95 transition shadow-lg">
-        Entendi
+      <button id="btnIniciar" disabled
+        class="w-full bg-yellow-400 text-black font-semibold py-2 rounded-xl
+               hover:bg-yellow-500 active:scale-95 transition
+               disabled:bg-gray-300 disabled:cursor-not-allowed shadow-lg">
+        Iniciar Integração
       </button>
     </div>
   </div>
+</div>
 
-  <!-- CONTEÚDO -->
-  <div id="conteudo" class="hidden bg-white p-10 rounded-3xl shadow-2xl w-full max-w-3xl">
+<!-- CONTEÚDO -->
+<div id="conteudo" class="hidden bg-white p-10 rounded-3xl shadow-2xl w-full max-w-3xl">
 
-    <div id="topico1">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">🏢 Conheça a De Santa</h2>
-      <p class="text-gray-700 mb-4">
-        A De Santa Logística nasceu com o propósito de criar soluções ágeis e eficientes
-        para o mercado de transporte.
-      </p>
+  <!-- TÓPICO 1 -->
+  <div id="topico1">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">🏢 Conheça a De Santa</h2>
+    <p class="text-gray-700 mb-4">
+      A De Santa Logística nasceu com o propósito de criar soluções ágeis e eficientes
+      para o mercado de transporte, atuando com cargas dedicadas e fracionadas.
+      Ao longo de nossa trajetória, tornamo-nos referência em transporte para diversos segmentos, graças a:
+    </p>
 
-      <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-1">
-        <li>Pontos de apoio estrategicamente localizados</li>
-        <li>Excelente coordenação entre unidades</li>
-        <li>Compromisso com segurança, qualidade e eficiência</li>
-      </ul>
+    <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-1">
+      <li>Pontos de apoio estrategicamente localizados</li>
+      <li>Excelente coordenação entre unidades</li>
+      <li>Compromisso com segurança, qualidade e eficiência operacional</li>
+    </ul>
 
-      <label class="flex items-center gap-3 cursor-pointer">
-        <input type="checkbox" onclick="proximo(1)" class="w-5 h-5 accent-yellow-400">
-        <span class="font-medium text-gray-800">Li e compreendi este tópico</span>
-      </label>
-    </div>
-
-    <div id="topico2" class="hidden">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">🔐 Segurança e Qualidade</h2>
-      <p class="text-gray-700 mb-6">
-        Empresa certificada, com CIPA, socorristas e brigadistas treinados.
-      </p>
-
-      <label class="flex items-center gap-3 cursor-pointer">
-        <input type="checkbox" onclick="proximo(2)" class="w-5 h-5 accent-yellow-400">
-        <span class="font-medium text-gray-800">Li e compreendi este tópico</span>
-      </label>
-    </div>
-
-    <div id="topico3" class="hidden">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">♻️ Meio Ambiente</h2>
-      <p class="text-gray-700 mb-6">
-        Práticas de coleta seletiva e incentivo ao descarte consciente de resíduos.
-      </p>
-
-      <label class="flex items-center gap-3 cursor-pointer">
-        <input type="checkbox" onclick="proximo(3)" class="w-5 h-5 accent-yellow-400">
-        <span class="font-medium text-gray-800">Li e compreendi este tópico</span>
-      </label>
-    </div>
-
-    <div id="topico4" class="hidden">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">⚠️ Orientações de Segurança</h2>
-
-      <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-1">
-        <li>Utilize EPIs</li>
-        <li>Não circule desacompanhado</li>
-        <li>Respeite sinalizações</li>
-        <li>Atenção ao trânsito de máquinas</li>
-      </ul>
-
-      <label class="flex items-center gap-3 cursor-pointer">
-        <input type="checkbox" onclick="finalizar()" class="w-5 h-5 accent-yellow-400">
-        <span class="font-medium text-gray-800">Li e compreendi este tópico</span>
-      </label>
-    </div>
-
-    <div id="final" class="hidden text-center">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">📬 Contato</h2>
-      <p class="text-gray-700">📧 faleconosco@desantalog.com.br</p>
-      <p class="text-gray-700">🌐 www.desantalog.com.br</p>
-      <p class="text-gray-700">📱 @desantaTransporte</p>
-
-      <p class="mt-6 text-sm text-gray-500">
-        Obrigado por realizar a integração.
-      </p>
-    </div>
-
+    <label class="flex items-center gap-3 cursor-pointer">
+      <input type="checkbox" onclick="proximo(1)" class="w-5 h-5 accent-yellow-400">
+      <span class="font-medium text-gray-800">Li e compreendi este tópico</span>
+    </label>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="fixed bottom-0 left-0 w-full text-center text-gray-300 text-sm p-3">
-    Desenvolvido por
-    <a href="mailto:jean.marques@desantalog.com.br"
-       class="text-gray-300 hover:text-gray-400 transition-colors duration-200">
-      Jean Marques<sup>®</sup>
-    </a>
-  </footer>
+  <!-- TÓPICO 2 -->
+  <div id="topico2" class="hidden">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">🔐 Compromisso com Segurança e Qualidade</h2>
+    <p class="text-gray-700 mb-6">
+      Somos uma empresa certificada, comprometida com as boas práticas de segurança,
+      saúde e meio ambiente. Contamos com CIPA, socorristas e brigadistas treinados
+      para garantir um ambiente seguro para todos.
+    </p>
 
-  <!-- JS -->
-  <script>
-    const nome = document.getElementById("nome");
-    const empresa = document.getElementById("empresa");
-    const dataVisita = document.getElementById("dataVisita");
-    const unidade = document.getElementById("unidade");
-    const btn = document.getElementById("btnIniciar");
+    <label class="flex items-center gap-3 cursor-pointer">
+      <input type="checkbox" onclick="proximo(2)" class="w-5 h-5 accent-yellow-400">
+      <span class="font-medium text-gray-800">Li e compreendi este tópico</span>
+    </label>
+  </div>
 
-    function validar() {
-      btn.disabled = !(nome.value && empresa.value && dataVisita.value && unidade.value);
-    }
+  <!-- TÓPICO 3 -->
+  <div id="topico3" class="hidden">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">♻️ Meio Ambiente</h2>
+    <p class="text-gray-700 mb-6">
+      Adotamos práticas de coleta seletiva e incentivo ao descarte consciente de resíduos.
+      Ajude-nos a manter um ambiente limpo e sustentável.
+    </p>
 
-    nome.oninput = empresa.oninput = dataVisita.onchange = unidade.onchange = validar;
+    <label class="flex items-center gap-3 cursor-pointer">
+      <input type="checkbox" onclick="proximo(3)" class="w-5 h-5 accent-yellow-400">
+      <span class="font-medium text-gray-800">Li e compreendi este tópico</span>
+    </label>
+  </div>
 
-    btn.onclick = () => {
-      if (btn.disabled) {
-        mostrarAviso();
-        return;
-      }
-      document.getElementById("modalCadastro").classList.add("hidden");
-      document.getElementById("conteudo").classList.remove("hidden");
-    };
+  <!-- TÓPICO 4 -->
+  <div id="topico4" class="hidden">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">⚠️ Orientações de Segurança</h2>
 
-    function mostrarAviso() {
-      const popup = document.getElementById("popupAviso");
-      popup.classList.remove("hidden");
-      popup.classList.add("flex");
-    }
+    <p class="text-gray-700 mb-4">
+      Para sua segurança, siga rigorosamente as orientações abaixo durante sua permanência na empresa:
+    </p>
 
-    function fecharAviso() {
-      const popup = document.getElementById("popupAviso");
-      popup.classList.add("hidden");
-      popup.classList.remove("flex");
-    }
+    <ul class="list-disc pl-6 text-gray-700 mb-4 space-y-1">
+      <li>Utilize sempre os EPIs fornecidos pela empresa</li>
+      <li>Não circule desacompanhado — esteja sempre com um colaborador De Santa</li>
+      <li>Circule exclusivamente pelas faixas de segurança</li>
+      <li>Evite o uso do celular enquanto caminha; utilize-o apenas quando estiver parado</li>
+      <li>Ao subir ou descer escadas, utilize os corrimãos</li>
+      <li>Não é permitido comer nas dependências do armazém</li>
+      <li>Atenção ao trânsito de máquinas e equipamentos</li>
+      <li>Respeite todas as placas de sinalização distribuídas pelo ambiente</li>
+      <li>Em caso de emergência, siga as orientações da Brigada de Emergência</li>
+    </ul>
 
-    function proximo(n) {
-      document.getElementById("topico" + n).classList.add("hidden");
-      document.getElementById("topico" + (n + 1)).classList.remove("hidden");
-    }
+    <p class="text-gray-700 mb-6">
+      Sua colaboração é essencial para mantermos um ambiente seguro.
+    </p>
 
-    function finalizar() {
-      document.getElementById("topico4").classList.add("hidden");
-      document.getElementById("final").classList.remove("hidden");
-    }
-  </script>
+    <label class="flex items-center gap-3 cursor-pointer">
+      <input type="checkbox" onclick="finalizar()" class="w-5 h-5 accent-yellow-400">
+      <span class="font-medium text-gray-800">Li e compreendi este tópico</span>
+    </label>
+  </div>
+
+  <!-- FINAL -->
+  <div id="final" class="hidden text-center">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">📬 Contato e Canais Digitais</h2>
+    <p class="text-gray-700">📧 faleconosco@desantalog.com.br</p>
+    <p class="text-gray-700">🌐 www.desantalog.com.br</p>
+    <p class="text-gray-700">📱 @desantaTransporte</p>
+
+    <p class="mt-6 text-sm text-gray-500">
+      Obrigado por realizar a integração.
+    </p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="fixed bottom-0 left-0 w-full text-center text-gray-300 text-sm p-3">
+  Desenvolvido por
+  <a href="mailto:jean.marques@desantalog.com.br"
+     class="text-gray-300 hover:text-gray-400 transition-colors duration-200">
+    Jean Marques<sup>®</sup>
+  </a>
+</footer>
+
+<!-- JS -->
+<script>
+  const nome = document.getElementById("nome");
+  const empresa = document.getElementById("empresa");
+  const dataVisita = document.getElementById("dataVisita");
+  const unidade = document.getElementById("unidade");
+  const btn = document.getElementById("btnIniciar");
+
+  function validar() {
+    btn.disabled = !(
+      nome.value.trim() &&
+      empresa.value.trim() &&
+      dataVisita.value &&
+      unidade.value
+    );
+  }
+
+  nome.addEventListener("input", validar);
+  empresa.addEventListener("input", validar);
+  dataVisita.addEventListener("change", validar);
+  unidade.addEventListener("change", validar);
+
+  btn.onclick = () => {
+    document.getElementById("modalCadastro").classList.add("hidden");
+    document.getElementById("conteudo").classList.remove("hidden");
+  };
+
+  function proximo(n) {
+    document.getElementById("topico" + n).classList.add("hidden");
+    document.getElementById("topico" + (n + 1)).classList.remove("hidden");
+  }
+
+  function finalizar() {
+    document.getElementById("topico4").classList.add("hidden");
+    document.getElementById("final").classList.remove("hidden");
+  }
+</script>
 
 </body>
 </html>
