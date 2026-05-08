@@ -139,8 +139,9 @@ body {
   <!-- 🏢 TOPO -->
   <div class="flex justify-end mb-4">
 
-    <img 
-  src="https://cdn.jsdelivr.net/gh/jeanmm03/integracaodigital@main/logoDS.png"
+    <img
+  src="file:///C:/Users/Jean%20Marques/Downloads/logoDS.png"
+  alt="Logo De Santa"
   class="h-10 object-contain"
 />
 
@@ -579,25 +580,39 @@ unidade.onchange = validar;
 btnIniciar.onclick = () => {
 
   modalCadastro.classList.add("hidden");
-
   conteudo.classList.remove("hidden");
+
+  // garante topo do primeiro step
+  setTimeout(() => {
+    document.getElementById("step1").scrollTop = 0;
+  }, 50);
+
 };
 
 function nextStep(){
 
-  document.getElementById("step" + step)
-    .classList.replace("active-step", "hidden-step");
+  const atual = document.getElementById("step"+step);
+
+  atual.classList.replace("active-step","hidden-step");
+
+  atual.scrollTop = 0;
 
   step++;
 
-  const stepAtual = document.getElementById("step" + step);
+  const prox = document.getElementById("step"+step);
 
-  stepAtual.classList.replace("hidden-step", "active-step");
+  if(prox){
 
-  // 🔥 força scroll no topo
-  stepAtual.scrollTop = 0;
+    prox.classList.replace("hidden-step","active-step");
 
-  progress.style.width = (step * 20) + "%";
+    // força scroll no topo após renderizar
+    setTimeout(() => {
+      prox.scrollTop = 0;
+    }, 50);
+
+  }
+
+  document.getElementById("progress").style.width = (step*20)+"%";
 }
 
 function voltarInicio(){
