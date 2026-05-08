@@ -16,6 +16,25 @@ body {
 .fade {
   transition: all 0.4s ease;
 }
+
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 999px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
 .hidden-step {
   opacity: 0;
   transform: translateX(20px);
@@ -23,337 +42,593 @@ body {
   position: absolute;
   width: 100%;
 }
+
 .active-step {
   opacity: 1;
   transform: translateX(0);
   position: relative;
 }
+
+.texto-paragrafo {
+  margin-bottom: 14px;
+  line-height: 1.7;
+}
 </style>
 </head>
 
-<body class="flex items-center justify-center min-h-screen">
+<body class="flex items-center justify-center min-h-screen p-4">
 
 <!-- 🌍 IDIOMA -->
 <div id="modalIdioma" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-  <div class="bg-white p-8 rounded-2xl text-center space-y-3 w-full max-w-md">
-    <h2 class="text-xl font-bold">🌍 Idioma/ Language</h2>
-    <button onclick="setIdioma('pt')" class="w-full bg-yellow-400 p-2 rounded">Português</button>
-    <button onclick="setIdioma('en')" class="w-full bg-gray-200 p-2 rounded">English</button>
-    <button onclick="setIdioma('es')" class="w-full bg-gray-200 p-2 rounded">Español</button>
+  <div class="bg-white p-8 rounded-2xl text-center space-y-3 w-full max-w-md shadow-2xl">
+
+    <h2 class="text-xl font-bold">🌍 Idioma / Language</h2>
+
+    <button onclick="setIdioma('pt')" class="w-full bg-yellow-400 hover:bg-yellow-500 transition p-3 rounded-xl font-semibold">
+      Português
+    </button>
+
+    <button onclick="setIdioma('en')" class="w-full bg-gray-200 hover:bg-gray-300 transition p-3 rounded-xl font-semibold">
+      English
+    </button>
+
+    <button onclick="setIdioma('es')" class="w-full bg-gray-200 hover:bg-gray-300 transition p-3 rounded-xl font-semibold">
+      Español
+    </button>
+
   </div>
 </div>
 
 <!-- 🔐 CADASTRO -->
 <div id="modalCadastro" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+
   <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-md">
 
-    <h2 id="cadastroTitulo" class="text-2xl font-bold text-center mb-6"></h2>
+    <!-- 🏢 TÍTULO PRINCIPAL -->
+    <div class="text-center mb-6 space-y-2">
+
+      <h1 id="tituloPortal"
+          class="text-1xl font-extrabold text-gray-800 tracking-wide">
+      </h1>
+
+      <h2 id="cadastroTitulo"
+          class="text-xl font-semibold text-gray-700">
+      </h2>
+
+    </div>
 
     <div class="space-y-4">
-      <input id="nome" class="w-full border p-3 rounded-xl" />
-      <input id="empresa" class="w-full border p-3 rounded-xl" />
-      <input id="dataVisita" type="date" class="w-full border p-3 rounded-xl" />
 
-      <select id="unidade" class="w-full border p-3 rounded-xl">
+      <input id="nome"
+             class="w-full border p-3 rounded-xl" />
+
+      <input id="empresa"
+             class="w-full border p-3 rounded-xl" />
+
+      <input id="dataVisita"
+             type="date"
+             readonly
+             class="w-full border p-3 rounded-xl bg-gray-100 cursor-not-allowed" />
+
+      <select id="unidade"
+              class="w-full border p-3 rounded-xl">
+
         <option value="">Selecione...</option>
+
         <option>Osasco (Matriz)</option>
         <option>Sumaré (Filial)</option>
         <option>Pernambuco (Filial)</option>
+
       </select>
 
-      <button id="btnIniciar" disabled class="w-full bg-yellow-400 p-3 rounded-xl font-semibold"></button>
+      <button id="btnIniciar"
+              disabled
+              class="w-full bg-yellow-400 hover:bg-yellow-500 transition p-3 rounded-xl font-semibold disabled:opacity-40">
+      </button>
+
     </div>
+
   </div>
+
 </div>
 
 <!-- 📚 APP -->
-<div id="conteudo" class="hidden bg-white p-8 rounded-2xl w-full max-w-xl shadow-xl relative overflow-hidden">
+<div id="conteudo"
+  class="hidden bg-white p-8 rounded-2xl w-full max-w-4xl shadow-xl relative overflow-hidden">
 
-<!-- progress -->
-<div class="w-full bg-gray-200 h-2 rounded mb-6">
-  <div id="progress" class="bg-yellow-400 h-2 rounded transition-all" style="width:20%"></div>
-</div>
+  <!-- 🏢 TOPO -->
+  <div class="flex justify-end mb-4">
 
-<!-- STEPS -->
-<div class="relative min-h-[320px]">
+    <img
+  src="file:///C:/Users/Jean%20Marques/Downloads/logoDS.png"
+  alt="Logo De Santa"
+  class="h-10 object-contain"
+/>
 
-<div id="step1" class="fade active-step space-y-4">
-  <h2 id="t1titulo" class="text-xl font-bold"></h2>
-  <p id="t1p1"></p>
-  <ul id="t1lista" class="list-disc pl-5"></ul>
-  <button id="btnNext" onclick="nextStep()" class="bg-yellow-400 px-4 py-2 rounded"></button>
-</div>
-
-<div id="step2" class="fade hidden-step space-y-4">
-  <h2 id="t2titulo" class="text-xl font-bold"></h2>
-  <p id="t2p1"></p>
-  <button id="btnNext2" onclick="nextStep()" class="bg-yellow-400 px-4 py-2 rounded"></button>
-</div>
-
-<div id="step3" class="fade hidden-step space-y-4">
-  <h2 id="t3titulo" class="text-xl font-bold"></h2>
-  <p id="t3p1"></p>
-  <button id="btnNext3" onclick="nextStep()" class="bg-yellow-400 px-4 py-2 rounded"></button>
-</div>
-
-<div id="step4" class="fade hidden-step space-y-4">
-  <h2 id="t4titulo" class="text-xl font-bold"></h2>
-  <ul id="t4lista" class="list-disc pl-5"></ul>
-  <button id="btnNext4" onclick="nextStep()" class="bg-yellow-400 px-4 py-2 rounded"></button>
-</div>
-
-<div id="step5" class="fade hidden-step text-center space-y-3">
-  <h2 id="finalTitulo" class="text-xl font-bold"></h2>
-  <p id="finalMsg"></p>
-
-  <div class="text-gray-600 text-sm mt-4 space-y-1">
-    <p>📧 faleconosco@desantalog.com.br</p>
-    <p>🌐 www.desantalog.com.br</p>
-    <p>📱 @desantaTransporte</p>
   </div>
 
-  <button id="btnRestart" onclick="voltarInicio()" 
-    class="mt-6 bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-xl transition"></button>
-</div>
+  <!-- progress -->
+  <div class="w-full bg-gray-200 h-2 rounded mb-6">
+    <div id="progress"
+      class="bg-yellow-400 h-2 rounded transition-all duration-500"
+      style="width:20%">
+    </div>
+  </div>
+
+  <!-- STEPS -->
+  <div class="relative min-h-[450px]">
+
+    <!-- STEP 1 -->
+    <div id="step1" class="fade active-step space-y-4">
+
+      <h2 id="t1titulo" class="text-2xl font-bold"></h2>
+
+      <div id="t1p1"></div>
+
+      <ul id="t1lista" class="space-y-2"></ul>
+
+      <button id="btnNext"
+        onclick="nextStep()"
+        class="bg-yellow-400 hover:bg-yellow-500 transition px-5 py-3 rounded-xl font-semibold">
+      </button>
+
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="step2" class="fade hidden-step space-y-4">
+
+      <h2 id="t2titulo" class="text-2xl font-bold"></h2>
+
+      <div id="t2p1"></div>
+
+      <button id="btnNext2"
+        onclick="nextStep()"
+        class="bg-yellow-400 hover:bg-yellow-500 transition px-5 py-3 rounded-xl font-semibold">
+      </button>
+
+    </div>
+
+    <!-- STEP 3 -->
+    <div id="step3" class="fade hidden-step space-y-4">
+
+      <h2 id="t3titulo" class="text-2xl font-bold"></h2>
+
+      <div id="t3p1"></div>
+
+      <button id="btnNext3"
+        onclick="nextStep()"
+        class="bg-yellow-400 hover:bg-yellow-500 transition px-5 py-3 rounded-xl font-semibold">
+      </button>
+
+    </div>
+
+    <!-- STEP 4 -->
+<div id="step4"
+     class="fade hidden-step space-y-4 max-h-[60vh] overflow-y-auto pr-3 custom-scroll">
+
+  <h2 id="t4titulo" class="text-2xl font-bold"></h2>
+
+  <p id="t4p1" class="texto-paragrafo"></p>
+
+  <ul id="t4lista" class="space-y-3"></ul>
+
+  <p id="t4p2" class="font-medium text-gray-700"></p>
+
+  <button id="btnNext4"
+    onclick="nextStep()"
+    class="bg-yellow-400 hover:bg-yellow-500 transition px-5 py-3 rounded-xl font-semibold">
+  </button>
 
 </div>
+
+    <!-- STEP 5 -->
+    <div id="step5" class="fade hidden-step text-center space-y-4">
+
+      <h2 id="finalTitulo" class="text-2xl font-bold"></h2>
+
+      <p id="finalMsg"></p>
+
+      <div class="text-gray-600 text-sm mt-6 space-y-2">
+        <p>📧 faleconosco@desantalog.com.br</p>
+        <p>🌐 www.desantalog.com.br</p>
+        <p>📱 @desantaTransporte</p>
+      </div>
+
+      <button id="btnRestart"
+        onclick="voltarInicio()"
+        class="mt-6 bg-gray-200 hover:bg-gray-300 px-5 py-3 rounded-xl transition font-semibold">
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- ✍️ ASSINATURA -->
+<div class="fixed bottom-2 w-full text-center text-xs text-gray-400">
+  <span id="assinaturaTxt"></span>
+
+  <a href="mailto:jean.marques@desantalog.com.br"
+    class="underline hover:text-gray-600 transition">
+    Jean Marques
+  </a>
 </div>
 
 <script>
+
 let idioma = "pt";
 let step = 1;
 
 const textos = {
+
   pt: {
+
+  tituloPortal:`INTEGRAÇÃO DIGITAL DE SANTA`,
+
   cadastro:`🔐 Identificação do Visitante`,
-  nome:`Nome completo`,
-  empresa:`Empresa`,
-  iniciar:`Iniciar Integração`,
-  btnContinuar:`Continuar`,
-  btnFinalizar:`Finalizar`,
-  btnVoltar:`🔄 Voltar ao início`,
-  assinatura: `Desenvolvido por`,
+    nome:`Nome completo`,
+    empresa:`Empresa`,
+    iniciar:`Iniciar Integração`,
+    btnContinuar:`Continuar`,
+    btnFinalizar:`Finalizar`,
+    btnVoltar:`🔄 Voltar ao início`,
+    assinatura:`Desenvolvido por`,
 
-  t1titulo:`🏢 Conheça a De Santa`,
-  t1p1:`A De Santa Logística nasceu com o propósito de criar soluções ágeis e eficientes para o mercado de transporte, atuando com cargas dedicadas e fracionadas.
-Ao longo de nossa trajetória, tornamo-nos referência em transporte para diversos segmentos, graças a:`,
+    t1titulo:`🏢 Conheça a De Santa`,
 
-  t1lista:[
-    `Pontos de apoio estrategicamente localizados`,
-    `Excelente coordenação entre unidades`,
-    `Compromisso com segurança, qualidade e eficiência operacional`
-  ],
+    t1p1:[
+      `A De Santa Logística nasceu com o propósito de oferecer soluções ágeis, seguras e eficientes para o transporte e armazenagem de cargas, atuando nos segmentos dedicados e fracionados com excelência operacional.`,
 
-  t2titulo:`🔐 Compromisso com Segurança e Qualidade`,
-  t2p1:`Somos uma empresa certificada, comprometida com as boas práticas de segurança, saúde e meio ambiente. Contamos com CIPA, socorristas e brigadistas treinados para garantir um ambiente seguro para todos.`,
+      `Ao longo da nossa trajetória, consolidamos nossa atuação como referência no setor logístico, atendendo diversos segmentos com qualidade, organização e compromisso em cada operação realizada.`,
 
-  t3titulo:`♻️ Meio Ambiente`,
-  t3p1:`Adotamos práticas de coleta seletiva e incentivo ao descarte consciente de resíduos.
-Ajude-nos a manter um ambiente limpo e sustentável.`,
+      `Nossa estrutura foi desenvolvida para garantir eficiência em todas as etapas do processo logístico, desde o armazenamento até a entrega final, proporcionando mais segurança, agilidade e confiabilidade aos nossos clientes.`,
+    ],
 
-  t4titulo:`⚠️ Orientações de Segurança`,
-  t4p1:`Para sua segurança, siga rigorosamente as orientações abaixo durante sua permanência na empresa:`,
+    t1lista:[
+      `📍 Pontos de apoio estrategicamente localizados`,
+      `🚛 Transporte dedicado e fracionado`,
+      `🏢 Estrutura para armazenagem e apoio logístico`,
+      `🤝 Integração eficiente entre unidades e equipes`,
+      `🛡️ Compromisso com segurança, qualidade e eficiência operacional`,
+      `⚡ Agilidade e excelência no atendimento`,
+    ],
 
-  t4lista:[
-    `Utilize sempre os EPIs fornecidos pela empresa`,
-    `Não circule desacompanhado — esteja sempre com um colaborador De Santa`,
-    `Circule exclusivamente pelas faixas de segurança`,
-    `Evite o uso do celular enquanto caminha; utilize-o apenas quando estiver parado`,
-    `Ao subir ou descer escadas, utilize os corrimãos`,
-    `Não é permitido comer nas dependências do armazém`,
-    `Atenção ao trânsito de máquinas e equipamentos`,
-    `Respeite todas as placas de sinalização distribuídas pelo ambiente`,
-    `Em caso de emergência, siga as orientações da Brigada de Emergência`
-  ],
+    t2titulo:`🔐 Compromisso com Segurança e Qualidade`,
 
-  t4p2:`Sua colaboração é essencial para mantermos um ambiente seguro.`,
+    t2p1:[
+      `Somos uma empresa certificada e comprometida com a excelência em qualidade, segurança, saúde ocupacional, meio ambiente e segurança viária.`,
 
-  finalTitulo:`📬 Integração concluída`,
-  finalMsg:`Obrigado por realizar a integração.`
-},
+      `Fomos a primeira transportadora a conquistar de forma integrada as certificações ISO 9001, ISO 14001, ISO 45001, ISO 39001 e SASSMAQ.`,
 
-en: {
+      `Investimos constantemente em inovação e sustentabilidade, contando com uma frota 100% elétrica.`,
+    ],
+
+    t3titulo:`♻️ Meio Ambiente`,
+
+    t3p1:[
+      `Comprometidos com a sustentabilidade, adotamos práticas de coleta seletiva e incentivamos o descarte consciente de resíduos.`,
+
+      `Por meio do Programa 5S, promovemos organização, limpeza, padronização e disciplina nos ambientes de trabalho.`,
+
+      `Contamos com a colaboração de todos para manter um ambiente limpo, organizado e seguro.`,
+    ],
+
+    t4titulo:`⚠️ Orientações de Segurança`,
+
+    t4p1:`Para sua segurança, siga rigorosamente as orientações abaixo durante sua permanência na empresa:`,
+
+    t4lista:[
+      `Utilize sempre os EPIs exigidos`,
+      `Não circule desacompanhado`,
+      `Circule apenas pelas faixas de pedestres`,
+      `Evite usar celular enquanto caminha`,
+      `Utilize os corrimãos`,
+      `Não coma ou fume no armazém`,
+      `Mantenha atenção às máquinas em operação`,
+      `Respeite toda sinalização`,
+      `Em emergências, siga a Brigada`,
+      `Comunique imediatamente qualquer incidente`,
+    ],
+
+    t4p2:`Sua colaboração é essencial para mantermos um ambiente seguro.`,
+
+    finalTitulo:`📬 Integração concluída`,
+    finalMsg:`Obrigado por realizar a integração.`
+
+  },
+
+  en: {
+
+  tituloPortal:`DE SANTA DIGITAL ONBOARDING`,
+
   cadastro:`🔐 Visitor Identification`,
-  nome:`Full name`,
-  empresa:`Company`,
-  iniciar:`Start Integration`,
-  btnContinuar:`Continue`,
-  btnFinalizar:`Finish`,
-  btnVoltar:`🔄 Back to start`,
-  assinatura: `Developed by`,
+    nome:`Full name`,
+    empresa:`Company`,
+    iniciar:`Start Integration`,
+    btnContinuar:`Continue`,
+    btnFinalizar:`Finish`,
+    btnVoltar:`🔄 Back to start`,
+    assinatura:`Developed by`,
 
-  t1titulo:`🏢 About De Santa`,
-  t1p1:`De Santa Logistics was founded with the purpose of creating agile and efficient solutions for the transportation market, operating with dedicated and less-than-truckload freight.
-Throughout our journey, we have become a reference in transportation for various segments, thanks to:`,
+    t1titulo:`🏢 About De Santa`,
 
-  t1lista:[
-    `Strategically located support points`,
-    `Excellent coordination between units`,
-    `Commitment to safety, quality, and operational efficiency`
-  ],
+    t1p1:[
+      `De Santa Logistics was founded to provide agile, safe, and efficient logistics solutions.`,
 
-  t2titulo:`🔐 Commitment to Safety and Quality`,
-  t2p1:`We are a certified company committed to best practices in safety, health, and environmental management. We have CIPA, first responders, and trained emergency teams
-to ensure a safe environment for everyone.`,
+      `Over the years, we have become a reference in the logistics sector.`,
 
-  t3titulo:`♻️ Environment`,
-  t3p1:`We adopt selective waste collection practices and encourage conscious disposal of waste.
-Help us maintain a clean and sustainable environment.`,
+      `Our structure ensures efficiency, safety, and reliability throughout the logistics process.`,
+    ],
 
-  t4titulo:`⚠️ Safety Guidelines`,
-  t4p1:`For your safety, strictly follow the guidelines below during your stay at the company:`,
+    t1lista:[
+      `📍 Strategically located support points`,
+      `🚛 Dedicated and LTL transportation`,
+      `🏢 Warehousing and logistics support`,
+      `🤝 Efficient integration between teams`,
+      `🛡️ Commitment to safety and quality`,
+      `⚡ Agility and service excellence`,
+    ],
 
-  t4lista:[
-    `Always use the PPE provided by the company`,
-    `Do not walk around unaccompanied — always stay with a De Santa employee`,
-    `Only walk within designated safety paths`,
-    `Avoid using your phone while walking; only use it when stationary`,
-    `Use handrails when going up or down stairs`,
-    `Eating is not allowed in warehouse areas`,
-    `Be aware of moving machinery and equipment`,
-    `Respect all safety signage throughout the facility`,
-    `In case of emergency, follow instructions from the Emergency Brigade`
-  ],
+    t2titulo:`🔐 Commitment to Safety and Quality`,
 
-  t4p2:`Your cooperation is essential to maintain a safe environment.`,
+    t2p1:[
+      `We are a certified company committed to quality, safety, occupational health, environment, and road safety.`,
 
-  finalTitulo:`📬 Completed`,
-  finalMsg:`Thank you for completing the onboarding.`
-},
+      `We achieved integrated ISO and SASSMAQ certifications.`,
 
-es: {
+      `We continuously invest in innovation and sustainability with a fully electric fleet.`,
+    ],
+
+    t3titulo:`♻️ Environment`,
+
+    t3p1:[
+      `We adopt selective waste collection practices and encourage responsible disposal.`,
+
+      `Through the 5S Program, we promote organization and workplace discipline.`,
+
+      `We count on everyone’s collaboration to maintain a clean and safe environment.`,
+    ],
+
+    t4titulo:`⚠️ Safety Guidelines`,
+
+    t4p1:`For your safety, strictly follow the guidelines below:`,
+
+    t4lista:[
+      `Always wear required PPE`,
+      `Do not walk unaccompanied`,
+      `Use designated pedestrian walkways`,
+      `Avoid phone use while walking`,
+      `Use handrails on stairs`,
+      `Do not eat or smoke inside the warehouse`,
+      `Stay alert to machinery movement`,
+      `Respect all safety signage`,
+      `Follow emergency brigade instructions`,
+      `Report unsafe conditions immediately`,
+    ],
+
+    t4p2:`Your cooperation is essential to maintain a safe environment.`,
+
+    finalTitulo:`📬 Completed`,
+    finalMsg:`Thank you for completing the onboarding.`
+
+  },
+
+  es: {
+
+  tituloPortal:`INTEGRACIÓN DIGITAL DE SANTA`,
+
   cadastro:`🔐 Identificación del Visitante`,
-  nome:`Nombre completo`,
-  empresa:`Empresa`,
-  iniciar:`Iniciar Integración`,
-  btnContinuar:`Continuar`,
-  btnFinalizar:`Finalizar`,
-  btnVoltar:`🔄 Volver al inicio`,
-  assinatura: `Desarrollado por`,
+    nome:`Nombre completo`,
+    empresa:`Empresa`,
+    iniciar:`Iniciar Integración`,
+    btnContinuar:`Continuar`,
+    btnFinalizar:`Finalizar`,
+    btnVoltar:`🔄 Volver al inicio`,
+    assinatura:`Desarrollado por`,
 
-  t1titulo:`🏢 Conozca De Santa`,
-  t1p1:`De Santa Logística nació con el propósito de crear soluciones ágiles y eficientes para el mercado del transporte, operando con cargas dedicadas y fraccionadas.
-A lo largo de nuestra trayectoria, nos hemos convertido en un referente en transporte para diversos sectores, gracias a:`,
+    t1titulo:`🏢 Conozca De Santa`,
 
-  t1lista:[
-    `Puntos de apoyo estratégicamente ubicados`,
-    `Excelente coordinación entre unidades`,
-    `Compromiso con la seguridad, la calidad y la eficiencia operativa`
-  ],
+    t1p1:[
+      `De Santa Logística nació con el propósito de ofrecer soluciones ágiles, seguras y eficientes.`,
 
-  t2titulo:`🔐 Compromiso con la Seguridad y la Calidad`,
-  t2p1:`Somos una empresa certificada, comprometida con las buenas prácticas de seguridad, salud y medio ambiente. Contamos con CIPA, socorristas y brigadas de emergencia capacitadas
-para garantizar un entorno seguro para todos.`,
+      `Consolidamos nuestra actuación como referencia en el sector logístico.`,
 
-  t3titulo:`♻️ Medio Ambiente`,
-  t3p1:`Adoptamos prácticas de recogida selectiva y fomentamos la eliminación responsable de residuos.
-Ayúdenos a mantener un entorno limpio y sostenible.`,
+      `Nuestra estructura garantiza eficiencia, seguridad y confiabilidad.`,
+    ],
 
-  t4titulo:`⚠️ Normas de Seguridad`,
-  t4p1:`Para su seguridad, siga estrictamente las siguientes indicaciones durante su permanencia en la empresa:`,
+    t1lista:[
+      `📍 Puntos estratégicamente ubicados`,
+      `🚛 Transporte dedicado y fraccionado`,
+      `🏢 Estructura logística`,
+      `🤝 Integración eficiente`,
+      `🛡️ Compromiso con seguridad y calidad`,
+      `⚡ Agilidad y excelencia`,
+    ],
 
-  t4lista:[
-    `Utilice siempre los EPI proporcionados por la empresa`,
-    `No circule sin acompañamiento — permanezca siempre con un colaborador de De Santa`,
-    `Circule únicamente por las zonas de seguridad señalizadas`,
-    `Evite el uso del móvil mientras camina; utilícelo solo cuando esté detenido`,
-    `Utilice los pasamanos al subir o bajar escaleras`,
-    `No está permitido comer dentro del almacén`,
-    `Preste atención al tránsito de maquinaria y equipos`,
-    `Respete toda la señalización del entorno`,
-    `En caso de emergencia, siga las indicaciones de la brigada de emergencia`
-  ],
+    t2titulo:`🔐 Compromiso con la Seguridad y la Calidad`,
 
-  t4p2:`Su colaboración es esencial para mantener un entorno seguro.`,
+    t2p1:[
+      `Somos una empresa certificada comprometida con calidad y seguridad.`,
 
-  finalTitulo:`📬 Finalizado`,
-  finalMsg:`Gracias por completar la integración.`
-}
+      `Obtuvimos certificaciones ISO y SASSMAQ integradas.`,
+
+      `Invertimos constantemente en innovación y sostenibilidad.`,
+    ],
+
+    t3titulo:`♻️ Medio Ambiente`,
+
+    t3p1:[
+      `Adoptamos prácticas de recolección selectiva y descarte consciente.`,
+
+      `Con el Programa 5S promovemos organización y disciplina.`,
+
+      `Contamos con la colaboración de todos.`,
+    ],
+
+    t4titulo:`⚠️ Normas de Seguridad`,
+
+    t4p1:`Para su seguridad, siga estrictamente las siguientes orientaciones:`,
+
+    t4lista:[
+      `Utilice siempre los EPI obligatorios`,
+      `No circule sin acompañamiento`,
+      `Use únicamente las rutas peatonales`,
+      `Evite usar el móvil mientras camina`,
+      `Utilice los pasamanos`,
+      `No coma ni fume en el almacén`,
+      `Mantenga atención a las máquinas`,
+      `Respete toda la señalización`,
+      `Siga las orientaciones de emergencia`,
+      `Reporte inmediatamente cualquier incidente`,
+    ],
+
+    t4p2:`Su colaboración es esencial para mantener un entorno seguro.`,
+
+    finalTitulo:`📬 Finalizado`,
+    finalMsg:`Gracias por completar la integración.`
+
+  }
+
 };
 
+function renderParagrafos(elemento, lista){
+  elemento.innerHTML = lista
+    .map(texto => `<p class="texto-paragrafo">${texto}</p>`)
+    .join("");
+}
+
+function renderLista(elemento, lista){
+  elemento.innerHTML = lista
+    .map(item => `<li>${item}</li>`)
+    .join("");
+}
+
 function setIdioma(lang){
+
   idioma = lang;
+
   document.getElementById("modalIdioma").classList.add("hidden");
+
   document.getElementById("modalCadastro").classList.remove("hidden");
+
   aplicarIdioma();
+
+  // 📅 Define automaticamente a data atual
+  const hoje = new Date().toISOString().split('T')[0];
+  document.getElementById("dataVisita").value = hoje;
+
+  validar();
 }
 
 function aplicarIdioma(){
+
   const t = textos[idioma];
 
-  cadastroTitulo.innerText = t.cadastro;
+  tituloPortal.innerText = t.tituloPortal;
+
+cadastroTitulo.innerText = t.cadastro;
+
   nome.placeholder = t.nome;
+
   empresa.placeholder = t.empresa;
+
   btnIniciar.innerText = t.iniciar;
 
   t1titulo.innerText = t.t1titulo;
-  t1p1.innerText = t.t1p1;
-  t1lista.innerHTML = t.t1lista.map(i=>`<li>${i}</li>`).join("");
+  renderParagrafos(t1p1, t.t1p1);
+  renderLista(t1lista, t.t1lista);
 
   t2titulo.innerText = t.t2titulo;
-  t2p1.innerText = t.t2p1;
+  renderParagrafos(t2p1, t.t2p1);
 
   t3titulo.innerText = t.t3titulo;
-  t3p1.innerText = t.t3p1;
+  renderParagrafos(t3p1, t.t3p1);
 
   t4titulo.innerText = t.t4titulo;
-  t4lista.innerHTML = t.t4lista.map(i=>`<li>${i}</li>`).join("");
+  t4p1.innerText = t.t4p1;
+  renderLista(t4lista, t.t4lista);
+  t4p2.innerText = t.t4p2;
 
   finalTitulo.innerText = t.finalTitulo;
   finalMsg.innerText = t.finalMsg;
 
-  document.getElementById("btnNext").innerText = t.btnContinuar;
-  document.getElementById("btnNext2").innerText = t.btnContinuar;
-  document.getElementById("btnNext3").innerText = t.btnContinuar;
-  document.getElementById("btnNext4").innerText = t.btnFinalizar;
-  document.getElementById("btnRestart").innerText = t.btnVoltar;
-  document.getElementById("assinaturaTxt").innerText = t.assinatura + " "; 
+  btnNext.innerText = t.btnContinuar;
+  btnNext2.innerText = t.btnContinuar;
+  btnNext3.innerText = t.btnContinuar;
+  btnNext4.innerText = t.btnFinalizar;
+  btnRestart.innerText = t.btnVoltar;
+
+  assinaturaTxt.innerText = t.assinatura + " ";
 }
 
 function validar(){
-  btnIniciar.disabled = !(nome.value && empresa.value && dataVisita.value && unidade.value);
+
+  btnIniciar.disabled = !(
+    nome.value &&
+    empresa.value &&
+    dataVisita.value &&
+    unidade.value
+  );
 }
 
-nome.oninput = empresa.oninput = dataVisita.onchange = unidade.onchange = validar;
+nome.oninput = validar;
+empresa.oninput = validar;
+dataVisita.onchange = validar;
+unidade.onchange = validar;
 
 btnIniciar.onclick = () => {
+
   modalCadastro.classList.add("hidden");
+
   conteudo.classList.remove("hidden");
-  
 };
 
 function nextStep(){
-  document.getElementById("step"+step).classList.replace("active-step","hidden-step");
+
+  document.getElementById("step" + step)
+    .classList.replace("active-step", "hidden-step");
+
   step++;
-  document.getElementById("step"+step).classList.replace("hidden-step","active-step");
-  document.getElementById("progress").style.width = (step*20)+"%";
+
+  const stepAtual = document.getElementById("step" + step);
+
+  stepAtual.classList.replace("hidden-step", "active-step");
+
+  // 🔥 força scroll no topo
+  stepAtual.scrollTop = 0;
+
+  progress.style.width = (step * 20) + "%";
 }
 
 function voltarInicio(){
-  document.getElementById("step"+step).classList.replace("active-step","hidden-step");
-  step = 1;
-  document.getElementById("step1").classList.replace("hidden-step","active-step");
 
-  document.getElementById("progress").style.width = "20%";
+  document.getElementById("step" + step)
+    .classList.replace("active-step", "hidden-step");
+
+  step = 1;
+
+  document.getElementById("step1")
+    .classList.replace("hidden-step", "active-step");
+
+  progress.style.width = "20%";
 
   nome.value = "";
   empresa.value = "";
   dataVisita.value = "";
   unidade.value = "";
+
   btnIniciar.disabled = true;
 
   conteudo.classList.add("hidden");
+
   modalIdioma.classList.remove("hidden");
 }
-</script>
 
-<div class="fixed bottom-2 w-full text-center text-xs text-gray-400">
-  <span id="assinaturaTxt"></span>
-  <a href="mailto:jean.marques@desantalog.com.br"
-     class="underline hover:text-gray-600">
-     Jean Marques
-  </a>
-</div>
+window.onload = () => {
+  assinaturaTxt.innerText = textos.pt.assinatura + " ";
+};
+
+</script>
 
 </body>
 </html>
